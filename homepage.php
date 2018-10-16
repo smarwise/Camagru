@@ -5,9 +5,9 @@
 </head>
 <body>
 	<div class="navbar">
-		<a>Home</a>
-		<a>Login</a>
-		<a>Sign Up</a>
+		<a href="http://localhost:8080/Camagru/homepage.php">Home</a>
+		<a href="http://localhost:8080/Camagru/login.php">Login</a>
+		<a href="http://localhost:8080/Camagru/signup.php#">Sign Up</a>
 	  </div>
 	  <br />
 	</body>
