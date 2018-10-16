@@ -24,8 +24,7 @@
 	<br /><br />
   <button type="submit">Create Account</button>
   <button type="button">Cancel</button><br /><br />
-  <br /><br />
- <span class="psw"><a href="http://localhost:8080/Camagru/login.php">Login</a></span>
+ <span><a href="http://localhost:8080/Camagru/login.php">Login</a></span>
  </div>
 </form>
 </div>

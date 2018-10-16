@@ -56,5 +56,15 @@ label
 	top: 20%;
 }
 
+#myspace1
+{
+	width: 30%;
+	background-color: rgb(250, 252, 243);
+	margin: auto;
+	margin-top: 10%;
+	border: 3px solid rgb(192, 214, 255);
+	top: 10%;
+}
+
 a:visited { text-decoration: none; color: rgb(97, 131, 170); }
 a:hover { text-decoration: none; color:rgb(154, 182, 201); }
