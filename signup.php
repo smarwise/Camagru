@@ -7,20 +7,20 @@
 </head>
  <body>
 <div id="myspace">
-<form action="index.php">
+<form action="create.php" method="post">
 <div align="center">
   <h1>Camagru</h1>
   <label for="email" class="minor"><b>Email</b></label>
-  <input type="text" placeholder="Enter Email" name="login" required>
+  <input type="text" placeholder="Enter Email" name="email" required>
 	<br /><br />
 	<label for="username" class="minor"><b>Username</b></label>
-  <input type="text" placeholder="Enter Username" name="login" required>
+  <input type="text" placeholder="Enter Username" name="user" required>
 	<br /><br />
   <label for="psw" class="minor" ><b>Password</b></label>
   <input type="password" placeholder="Enter Password" name="passwd" required>
 	<br /><br />
 	<label for="psw" class="minor" ><b>Repeat Password</b></label>
-  <input type="password" placeholder="Enter Password" name="passwd" required>
+  <input type="password" placeholder="Enter Password" name="passwd2" required>
 	<br /><br />
   <button type="submit">Create Account</button>
   <button type="button">Cancel</button><br /><br />

@@ -7,7 +7,7 @@
 </head>
  <body>
 <div id="myspace">
-<form action="index.php">
+<form action="login.php">
 <div align="center">
   <h1>Camagru</h1>
   <label for="email" class="minor"><b>Email</b></label>
