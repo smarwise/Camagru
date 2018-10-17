@@ -7,11 +7,11 @@
 </head>
  <body>
 <div id="myspace">
-<form action="login.php">
+<form action="auth.php" method="post">
 <div align="center">
   <h1>Camagru</h1>
-  <label for="email" class="minor"><b>Email</b></label>
-  <input type="text" placeholder="Enter Email" name="login" required>
+  <label for="email" class="minor"><b>Username</b></label>
+  <input type="text" placeholder="Enter Username" name="login" required>
 	<br /><br />
   <label for="psw" class="minor" ><b>Password</b></label>
   <input type="password" placeholder="Enter Password" name="passwd" required>

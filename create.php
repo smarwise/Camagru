@@ -19,6 +19,15 @@ function		account_exists($accounts, $login, $email)
 	return(0);
 }
 
+function validemail($email)
+{
+	$reg = "/[a-zA-Z0-9_-.+]+@[a-zA-Z0-9-]+.[a-zA-Z]+/";
+	if (preg_match($reg, $email) == NULL)
+		return (0);
+	else
+		return (1);
+}
+
 //[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}
 function makeaccount()
 {
@@ -26,6 +35,8 @@ function makeaccount()
 
 	if ($_POST['email'] && $_POST['user'] && $_POST['passwd'] && $_POST['passwd2'])
 	{
+		// if (validemail($_POST["email"]) == 0)
+			// return ("valid");
 		$user = $_POST['user'];
 		if ($_POST['passwd'] != $_POST['passwd2'])
 		{
@@ -63,6 +74,8 @@ else if (makeaccount() == "passwd")
 	echo "Passwords do not match";
 else if (makeaccount() == "email")
 	echo "Email already has an account";
+else if (makeaccount() == "valid")
+	echo "Email is not valid";
 else
 {
 	echo "Account successfully created";

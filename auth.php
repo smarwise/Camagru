@@ -15,21 +15,19 @@ function	account_exists($accounts, $login, $password)
 
 function	auth()
 {
-	$login = $_POST["user"];
+	$login = $_POST["login"];
 	$passwd = $_POST["passwd"];
 	$accounts = array();
 	$accounts = unserialize(file_get_contents("private/passwd"));
+	print_r($accounts);
 	if (account_exists($accounts, $login, $passwd) === 1)
 	{
-		// echo "OK\n";
+		 echo "OK\n";
 		return (1);
-		// exit;
 	}
 	else
 	{
 		return (0);
-		// echo "ERROR\n";
-		// exit;
 	}
 }
 
