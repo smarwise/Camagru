@@ -19,7 +19,6 @@ function	auth()
 	$passwd = $_POST["passwd"];
 	$accounts = array();
 	$accounts = unserialize(file_get_contents("private/passwd"));
-	print_r($accounts);
 	if (account_exists($accounts, $login, $passwd) === 1)
 	{
 		 echo "OK\n";
@@ -32,7 +31,12 @@ function	auth()
 }
 
 if (auth() == 1)
+{
+	session_start();
+   	$_SESSION["username"] = $_GET["user"];
+	$_SESSION["logged"] = true;
 	header("Location:http://localhost:8080/Camagru/homepage.php");
+}
 else
 	echo "Error";
 ?>

@@ -6,6 +6,10 @@
 	<link rel="stylesheet"  href="login.css">
 </head>
  <body>
+ <div class="navbar">
+		<a href="http://localhost:8080/Camagru/index.php">Home</a>
+		<a href="http://localhost:8080/Camagru/login.php">Login</a>
+	</div>
 <div id="myspace">
 <form action="auth.php" method="post">
 <div align="center">

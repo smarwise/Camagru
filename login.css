@@ -21,6 +21,28 @@ button {
     width: 100%;
 }
 
+.navbar
+ {
+    overflow: hidden;
+    background-color: rgb(19, 51, 61);
+    font-family: Arial, Helvetica, sans-serif;
+    /* text-decoration-color: blue; */
+    position: fixed;
+    left : 0%;
+    right: 0%;
+    top: 0%;
+}
+
+.navbar a 
+{
+    float: left;
+    font-size: 16px;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
 button:hover {
     opacity: 0.8;
 }
@@ -67,4 +89,4 @@ label
 }
 
 a:visited { text-decoration: none; color: rgb(97, 131, 170); }
-a:hover { text-decoration: none; color:rgb(154, 182, 201); }
+a:hover { text-decoration: none; color:rgb(32, 119, 177); }
