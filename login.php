@@ -11,11 +11,11 @@
 		<a href="http://localhost:8080/Camagru/login.php">Login</a>
 	</div>
 <div id="myspace">
-<form action="auth.php" method="post">
+<form action="login.php" method="post">
 <div align="center">
   <h1>Camagru</h1>
   <label for="email" class="minor"><b>Username</b></label>
-  <input type="text" placeholder="Enter Username" name="login" required>
+  <input type="text" placeholder="Enter Username" name="user" required>
 	<br /><br />
   <label for="psw" class="minor" ><b>Password</b></label>
   <input type="password" placeholder="Enter Password" name="passwd" required>
@@ -31,3 +31,80 @@
 </div>
 </body>
 </html>
+
+<?PHP
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+require_once("config/database.php");
+
+$db->query("USE ".$dbname);
+function	account_exists($accounts, $login, $password)
+{
+	 
+	$i = 0;
+	while ($accounts[$i] != NULL)
+	{
+		if ($accounts[$i]["user"] === $login && $accounts[$i]['passwd'] === hash('whirlpool', $password))
+			return(1);
+		$i++;
+	}
+	return(0);
+}
+
+function	userexists($user, $pwd)
+{
+	$host = "localhost";
+	$dbname = "db_smarwise";
+	$db = new PDO("mysql:host=$host", "root", "codecrazy");
+	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	$db->query("USE ".$dbname);
+	$pswd = hash('whirlpool', $pwd);
+	$query = $db->prepare("SELECT username,passwd  FROM users WHERE username = :name AND passwd = :passwd");
+	$query->bindParam(':name', $user);
+	$query->bindParam(':passwd', $pswd);
+	$query->execute();
+	if ($query->rowcount() > 0)
+		return (1);
+	return (0);
+}
+
+if (isset($_GET['code']))
+{
+  $query = "SELECT id FROM users WHERE token = ? and verified = '0'";
+  $stmt = $db->prepare( $query );
+  $code = trim($_GET['code']);
+  $stmt->bindParam(1, $code);
+  $stmt->execute();
+  $num = $stmt->rowCount();
+  if ($num > 0)
+  {
+    $query = "UPDATE users set verified = '1' where token = :verification_code";
+    $line = $db->prepare($query);
+    $line->bindParam(':verification_code', $code);
+    if ($line->execute())
+      echo "Your email has been verified. You may now log in.";
+    else
+     {
+				echo "Failed to verify email";
+				exit;
+		 }
+  }
+  else
+   {
+			echo "Verification token is invalid. Please try again.";
+			exit;
+	 }
+}
+
+$user = $_POST['user'];
+$pwd = $_POST['passwd'];
+if (userexists($user, $pwd) == 1)
+{
+	session_start();
+   	$_SESSION["username"] = $_GET["user"];
+	$_SESSION["logged"] = true;
+	header("Location:http://localhost:8080/Camagru/homepage.php");
+}
+echo "Username and password do not match";
+?>

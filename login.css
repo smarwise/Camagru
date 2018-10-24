@@ -1,7 +1,11 @@
-body {font-family: Arial, Helvetica, sans-serif;} 
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 h1 {
     font-family: 'Charmonman';font-size: 22px;
 }
+
 input[type=text], input[type=password] {
     width: 100%;
     padding: 12px 20px;
@@ -12,7 +16,7 @@ input[type=text], input[type=password] {
 }
 
 button {
-    background-color: rgb(97, 131, 170);;
+    background-color: rgb(97, 131, 170);
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
@@ -26,7 +30,6 @@ button {
     overflow: hidden;
     background-color: rgb(19, 51, 61);
     font-family: Arial, Helvetica, sans-serif;
-    /* text-decoration-color: blue; */
     position: fixed;
     left : 0%;
     right: 0%;

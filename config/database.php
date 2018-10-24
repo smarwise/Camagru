@@ -20,5 +20,4 @@ catch (PDOException $e) {
 	print "Error!: " . $e->getMessage() . "";
 	die();
 }
-// $data = $db;
 ?>
