@@ -30,7 +30,8 @@ require_once("config/database.php");
 
 
 $db->query("USE ".$dbname);
-$email = $_POST['email'];
+if (isset($_POST['email']))
+	$email = $_POST['email'];
 $query = $db->prepare("SELECT username,passwd  FROM users WHERE email = :email");
 $query->bindParam(':email', $email);
 $query->execute();
@@ -40,7 +41,7 @@ if ($query->rowcount() > 0)
 	$verificationLink = "http://localhost:8080/Camagru/reset.php?code=" . $verificationCode;
 	$htmlStr = "";
 	$htmlStr .= "Hi " . $email . ",<br /><br />";
-	$htmlStr .= "Please click the button below to verify your subscription and have access to the Camagru website.<br /><br /><br />";
+	$htmlStr .= "Please click the button below to reset your password and have access to the Camagru website.<br /><br /><br />";
 	$htmlStr .= "<a href='{$verificationLink}' target='_blank' style='padding:1em; font-weight:bold; background-color:blue; color:#fff;'>RESET PASSWORD</a><br /><br /><br />";
 	$htmlStr .= "Kind regards,<br />";
 	$htmlStr .= "<a href='http://localhost:8080/Camagru/' target='_blank'>Camagru</a><br />";
@@ -51,8 +52,14 @@ if ($query->rowcount() > 0)
 	$headers  = "MIME-Version: 1.0\r\n";
 	$headers .= "Content-type: text/html; charset=iso-8859-1\r\n";
 	$headers .= "From: {$name} <{$email_sender}> \n";
-	$body = $htmlStr;
+  $body = $htmlStr;
+  $query = "UPDATE users set token = :code where email = :email";
+  $line = $db->prepare($query);
+  $line->bindParam(':code', $verificationCode);
+  $line->bindParam(':email', $email);
+  $line->execute();
 	if (mail($recipient_email, $subject, $body, $headers) )
    echo "<div id='successMessage'>An email was sent to <b>" . $email . "</b>, please open your email inbox and click the given link so you can reset your password.</div>";
+  
   }
 ?>

@@ -7,14 +7,14 @@
 </head>
  <body>
 <div id="myspace">
-<form action="reset.php">
+<form action="reset.php" method="post">
 <div align="center">
   <h1>Camagru</h1>
   <label for="psw" class="minor" ><b>New Password</b></label>
   <input type="password" placeholder="Enter Password" name="passwd" required>
 	<br /><br />
 	<label for="psw" class="minor" ><b>Repeat Password</b></label>
-  <input type="password" placeholder="Enter Password" name="passwd" required>
+  <input type="password" placeholder="Enter Password" name="passwd2" required>
 	<br /><br />
   <button type="submit">Reset Password</button>
   <button type="button">Cancel</button><br /><br />
@@ -25,32 +25,66 @@
 </body>
 </html>
 <?PHP
-
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+require_once("config/database.php");
+$db->query("USE ".$dbname);
+session_start();
 if (isset($_GET['code']))
 {
-  $query = "SELECT id FROM users WHERE token = ? and verified = '0'";
+  $query = "SELECT id FROM users WHERE token = ?";
   $stmt = $db->prepare( $query );
   $code = trim($_GET['code']);
+  $_SESSION["code"] = $code;
   $stmt->bindParam(1, $code);
   $stmt->execute();
   $num = $stmt->rowCount();
   if ($num > 0)
-  {
-    $query = "UPDATE users set verified = '1' where token = :verification_code";
-    $line = $db->prepare($query);
-    $line->bindParam(':verification_code', $code);
-    if ($line->execute())
-      echo "Your email has been verified. You may now log in.";
+    echo "You may now reset your password";
     else
-     {
-				echo "Failed to verify email";
-				exit;
-		 }
-  }
-  else
-   {
-			echo "Verification token is invalid. Please try again.";
-			exit;
+    {
+		echo "Failed to verify your ownership of this account";
+		exit;
 	 }
+}
+
+if (isset($_POST['passwd']) && isset($_POST['passwd2']))
+{
+  if ($_POST['passwd'] && $_POST['passwd2'])
+  {
+      if (isset($_SESSION['code']))
+        $token = $_SESSION['code'];
+      echo "$token";
+      if ($_POST['passwd'] != $_POST['passwd2'])
+     {
+      echo "<script type='text/javascript'>alert('Password does not match');</script>";
+      exit;
+      }
+      $password = $_POST['passwd'];
+    if (strlen($password) < 8)
+    {
+      echo "<script type='text/javascript'>alert('Password must be at least characters long');</script>";
+      exit;
+    }
+    if (!preg_match("#[0-9]+#", $password))
+    {
+      echo "<script type='text/javascript'>alert('Password must include at least one number');</script>";
+      exit;
+      }
+
+    if (!preg_match("#[a-zA-Z]+#", $password))
+    {
+          echo "<script type='text/javascript'>alert('Password must include at least one letter');</script>";
+      exit;
+      }
+      $pwd = hash('whirlpool', $password);
+      $query = "UPDATE users set passwd = :pwd where token = :code";
+      $line = $db->prepare($query);
+      $line->bindParam(':pwd', $pwd);
+      $line->bindParam(':code', $token);
+      if ($line->execute())
+          echo "Password has been successfully changed. You may now log in";
+  }
 }
 ?>

@@ -39,18 +39,18 @@ error_reporting(E_ALL);
 require_once("config/database.php");
 
 $db->query("USE ".$dbname);
-function	account_exists($accounts, $login, $password)
-{
+// function	account_exists($accounts, $login, $password)
+// {
 	 
-	$i = 0;
-	while ($accounts[$i] != NULL)
-	{
-		if ($accounts[$i]["user"] === $login && $accounts[$i]['passwd'] === hash('whirlpool', $password))
-			return(1);
-		$i++;
-	}
-	return(0);
-}
+// 	$i = 0;
+// 	while ($accounts[$i] != NULL)
+// 	{
+// 		if ($accounts[$i]["user"] === $login && $accounts[$i]['passwd'] === hash('whirlpool', $password))
+// 			return(1);
+// 		$i++;
+// 	}
+// 	return(0);
+// }
 
 function	userexists($user, $pwd)
 {
@@ -97,14 +97,21 @@ if (isset($_GET['code']))
 	 }
 }
 
-$user = $_POST['user'];
-$pwd = $_POST['passwd'];
-if (userexists($user, $pwd) == 1)
+if (isset($_POST['user']) && isset($_POST['passwd']))
 {
-	session_start();
-   	$_SESSION["username"] = $_GET["user"];
-	$_SESSION["logged"] = true;
-	header("Location:http://localhost:8080/Camagru/homepage.php");
+	$user = $_POST['user'];
+	$pwd = $_POST['passwd'];
 }
-echo "Username and password do not match";
+if (isset($user) && isset($pwd))
+{
+	if (userexists($user, $pwd) == 1)
+	{
+		session_start();
+  		$_SESSION["username"] = $user;
+		$_SESSION["logged"] = true;
+		header("Location:http://localhost:8080/Camagru/homepage.php?user=".$user);
+	}
+	else
+		echo "Username and password do not match";
+}
 ?>

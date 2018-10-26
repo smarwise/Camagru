@@ -17,4 +17,8 @@ $db->query("USE ".$dbname);
 		token text NOT NULL,
 		verified int DEFAULT '0' NOT NULL)";
 	$table = $db->exec($statement);
+	$table = "photos";
+	$columns = "id int PRIMARY KEY AUTO_INCREMENT NOT NULL, picture varchar(255) NOT NULL";
+	$statement = "CREATE TABLE IF NOT EXISTS `$dbname`.`$table` ($columns)";
+	$table = $db->exec($statement);
 ?>
