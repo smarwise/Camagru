@@ -1,0 +1,57 @@
+body
+{
+    margin: 0;
+    padding: 0;
+    background-color: rgb(121, 182, 231);
+}
+
+#canvas
+{
+    display: none;
+}
+
+.header
+{
+    background-color: rgb(25, 71, 110);
+    height: 35px;
+    padding : 15px;
+    color: white;
+}
+
+.header h1
+{
+    margin: 0;
+    text-align: center;
+}
+
+#images
+{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+}
+
+#video
+{
+    position:relative;
+}
+
+#overlay
+{
+    position:absolute;
+    width:160px;
+    min-height:40px;
+    background-color:#dadada;
+    z-index:300000;
+    bottom:10px;
+    left:10px;
+    text-align:center;
+}
+
+/* #img-overlay
+{
+    position: absolute;
+    left: 0;
+    width: 640;
+    height: 480;
+} */
