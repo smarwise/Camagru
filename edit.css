@@ -5,10 +5,10 @@ body
     background-color: rgb(121, 182, 231);
 }
 
-#canvas
+/* #canvas
 {
     display: none;
-}
+} */
 
 .header
 {
@@ -34,6 +34,11 @@ body
 #video
 {
     position:relative;
+}
+
+.bottom
+{
+    max-width: 960px;
 }
 
 #overlay

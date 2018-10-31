@@ -104,12 +104,14 @@ if ($_POST['email'] && $_POST['user'] && $_POST['passwd'] && $_POST['passwd2'])
 	if (mail($recipient_email, $subject, $body, $headers) )
 		echo "<div id='successMessage'>A verification email was sent to <b>" . $email . "</b>, please open your email inbox and click the given link so you can login.</div>";
 	$table = "users";
-	$sql = "INSERT INTO users (email, username, passwd, token) VALUES (:email, :username, :passwd, :token)";
+	$sql = "INSERT INTO users (email, username, passwd, notifications, token) VALUES (:email, :username, :passwd, :noti, :token)";
 	$coolpwd = hash('whirlpool', $password);
+	$noti = "off";
 	$stmt= $db->prepare($sql);
 	$stmt->bindParam(':email', $email);
 	$stmt->bindParam(':username', $user);
 	$stmt->bindParam(':passwd', $coolpwd);
+	$stmt->bindParam(':noti', $noti);
 	$stmt->bindParam(':token', $verificationCode);
 	$stmt->execute();
 }

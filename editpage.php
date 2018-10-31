@@ -15,17 +15,8 @@ require_once("config/database.php");
 <div class="top" style="position:relative;">
 <video id="video" width="640" height="480" muted="muted" autoplay></video>
 <img src="" alt="" id="img-overlay" style="position:absolute; left: 0;width: 640;height: 480;">
-<!-- <select id="filters">
-<option value="none">normal</option>
-<option value="grayscale(100%)">grayscale</option>
-<option value="sepia(100%)">sepia</option>
-<option value="invert(100%)">invert</option>
-<option value="hue-rotate(90deg)">hue</option>
-<option value="blur(10px)">blur</option>
-<option value="contrast(200%)">contrast</option>
-</select> -->
 <select id="stickers">
-<option id="overlay" value="none">normal</option>
+<option id="overlay" value="stickers/none.png">normal</option>
 <option id="overlay" value="stickers/cutecat.png">cutecat</option>
 <option id="overlay" value="stickers/bear.png">bear</option>
 <option id="overlay" value="stickers/dogears.png">dogears</option>
@@ -38,7 +29,7 @@ require_once("config/database.php");
 <canvas id="canvas" width="640" height="480"></canvas>
 </div>
 <div class="bottom">
-    <div id="photos"></div>
+    <div id="photos" id="images"></div>
 <div>
 <script>
 var video = document.getElementById('video');
@@ -57,26 +48,15 @@ if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)
     {
         video.src = window.URL.createObjectURL(stream);
         video.play();
-    });
-    
+    }); 
     photo.addEventListener("click", function(e) {
     takePicture();
      e.preventDefault();
     });
-    var filt = "none";
     var sticker = "none";
-    filter.addEventListener('change', function(e)
-    {
-        filt = e.target.value;
-        video.style.filter = filt;
-        e.preventDefault();
-    });
     clear.addEventListener('click', function(e)
     {
         images.innerHTML = '';
-        filt = "none";
-        video.style.filter = filt;
-        filter.selectedIndex = 0;
         e.preventDefault();
     });
     stickers.addEventListener('change', function(e)
@@ -87,15 +67,16 @@ if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)
     });
      function takePicture()
      {
+        var overlay = new Image();
+         overlay.src = sticker;
+         overlay.onload = function()
+         {
+            contex.drawImage(overlay, 0, 0, 640, 480);
+         }
          context.drawImage(video, 0, 0, 640, 480);
          const imgurl = canvas.toDataURL('image/png');
          const image = document.createElement('img');
          image.setAttribute('src', imgurl);
-         image.style.filter = filt;
-        if (sticker != "none")
-          {
-            
-          }
          photos.appendChild(image);
     }
 }

@@ -37,21 +37,9 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 require_once("config/database.php");
+session_start();
 
 $db->query("USE ".$dbname);
-// function	account_exists($accounts, $login, $password)
-// {
-	 
-// 	$i = 0;
-// 	while ($accounts[$i] != NULL)
-// 	{
-// 		if ($accounts[$i]["user"] === $login && $accounts[$i]['passwd'] === hash('whirlpool', $password))
-// 			return(1);
-// 		$i++;
-// 	}
-// 	return(0);
-// }
-
 function	userexists($user, $pwd)
 {
 	$host = "localhost";
@@ -100,6 +88,7 @@ if (isset($_GET['code']))
 if (isset($_POST['user']) && isset($_POST['passwd']))
 {
 	$user = $_POST['user'];
+	$_SESSION['user'] = $user;
 	$pwd = $_POST['passwd'];
 }
 if (isset($user) && isset($pwd))
