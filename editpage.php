@@ -77,8 +77,19 @@ if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)
          const imgurl = canvas.toDataURL('image/png');
          const image = document.createElement('img');
          image.setAttribute('src', imgurl);
+         console.log(imgurl);
          photos.appendChild(image);
     }
 }
 </script>
 </html>
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+require_once("config/database.php");
+
+
+// $url = $_GET['url'];
+// echo $url;
+?>
