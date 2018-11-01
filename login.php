@@ -88,7 +88,7 @@ if (isset($_GET['code']))
 if (isset($_POST['user']) && isset($_POST['passwd']))
 {
 	$user = $_POST['user'];
-	$_SESSION['user'] = $user;
+	// $_SESSION['user'] = $user;
 	$pwd = $_POST['passwd'];
 }
 if (isset($user) && isset($pwd))

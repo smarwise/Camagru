@@ -177,26 +177,29 @@ if (isset($_POST['email1']) && isset($_POST['email2']))
   }
 }
 
-if (isset($_POST['on']) && $_POST['on'] == 'On')
+if (isset($_POST['on']))
 {
-  $user = $_SESSION['user'];
-  $query = "UPDATE users set notifications = :on where username = :user";
-  $line = $db->prepare($query);
-  $on = "on";
-  $line->bindParam(':on', $on);
-  $line->bindParam(':user', $user);
-  if ($line->execute())
-    echo "Notifications successfully turned on.";
-}
-else if (isset($_POST['on']) && $_POST['on'] == 'Off')
-{
-  $user = $_SESSION['user'];
-  $query = "UPDATE users set notifications = :off where username = :user";
-  $line = $db->prepare($query);
-  $off = "off";
-  $line->bindParam(':off', $off);
-  $line->bindParam(':user', $user);
-  if ($line->execute())
-    echo "Notifications successfully turned off.";
+  if (isset($_POST['on']) && $_POST['on'] == 'On')
+  {
+    $user = $_SESSION['user'];
+    $query = "UPDATE users set notifications = :on where username = :user";
+    $line = $db->prepare($query);
+    $on = "on";
+    $line->bindParam(':on', $on);
+    $line->bindParam(':user', $user);
+    if ($line->execute())
+      echo "Notifications successfully turned on.";
+  }
+  else if (isset($_POST['on']) && $_POST['on'] == 'Off')
+  {
+    $user = $_SESSION['username'];
+    $query = "UPDATE users set notifications = :off where username = :user";
+    $line = $db->prepare($query);
+    $off = "off";
+    $line->bindParam(':off', $off);
+    $line->bindParam(':user', $user);
+    if ($line->execute())
+      echo "Notifications successfully turned off.";
+  }
 }
 ?>
