@@ -32,21 +32,22 @@ $query = $db->prepare("SELECT * FROM photos ORDER BY uploaded_on DESC");
 $query->execute();
 $num = $query->rowCount();
 $i = 0;
-    if($num > 0)
+if ($num > 0)
+{
+    while($line = $query->fetch(PDO::FETCH_ASSOC))
     {
-        while($line = $query->fetch(PDO::FETCH_ASSOC))
-        {
-            $imageURL[] = 'uploads/'.$line["file_name"];
-        }
-        // echo '<pre>', print_r($imageURL, true), '</pre>';
+       $imageURL[] = 'uploads/'.$line["file_name"];
     }
-    else
-    {
-        echo "No image(s) found...";
-    } 
-    foreach($photos as $art)
- {
-    $comments = $db->query("SELECT * FROM comments where photo_id = '$art->id'");
+        // echo '<pre>', print_r($imageURL, true), '</pre>';
+}
+else
+{
+    echo "No image(s) found...";
+} 
+foreach($photos as $art)
+{
+    echo 
+    $comments = $db->query("SELECT * FROM comments where photo_id = $art->id");
     $rows = $comments->rowCount();
     if ($rows > 0)
     {

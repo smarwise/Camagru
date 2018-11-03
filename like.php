@@ -10,9 +10,9 @@ session_start();
 if (isset($_GET['type']))
 {
     $type = $_GET['type'];
-    // $id =  (int)$_GET['id'];
-   $id = (int)1;
-   $_SESSION["user_id"] = (int)1;
+    $id =  (int)$_GET['id'];
+//    $id = (int)1;
+   $_SESSION["user_id"] = (int)2;
 
    if ($type == "photo")
    {
