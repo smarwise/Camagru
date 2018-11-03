@@ -1,7 +1,5 @@
 <?PHP
 
-// include "create.php";
-
 $host = "localhost";
 $username = "root";
 $password = "codecrazy";
