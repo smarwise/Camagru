@@ -28,4 +28,11 @@ $db->query("USE ".$dbname);
 	`photo` int COLLATE utf8_unicode_ci NOT NULL";
 	$statement = "CREATE TABLE IF NOT EXISTS `$dbname`.`$table` ($columns)";
 	$table = $db->exec($statement);
+	$table = "comments";
+	$statement = "CREATE TABLE IF NOT EXISTS `$dbname`.`$table` (
+		id int PRIMARY KEY AUTO_INCREMENT NOT NULL,
+		name varchar(255) NOT NULL,
+		comment varchar(255) NOT NULL,
+		photo_id int NOT NULL)";
+	$table = $db->exec($statement);
 ?>
