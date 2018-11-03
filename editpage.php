@@ -26,6 +26,11 @@ require_once("config/database.php");
 </select>
 <button id="snap">Snap Photo</button>
 <button id="clear">Clear</button>
+<form name="myform" action="editpage.php" method="post" id="myform">
+      <input type="submit" name="submit" value="Test!" />
+      <input type="hidden" name="hidden1" id="hidden1" />
+      <input type="hidden" name="hidden2" id="hidden2" />
+   </form>
 <canvas id="canvas" width="640" height="480"></canvas>
 </div>
 <div class="bottom">
@@ -67,18 +72,20 @@ if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)
     });
      function takePicture()
      {
-        var overlay = new Image();
-         overlay.src = sticker;
-         overlay.onload = function()
-         {
-            contex.drawImage(overlay, 0, 0, 640, 480);
-         }
+        // var overlay = new Image();
+        //  overlay.src = sticker;
+        //  overlay.onload = function()
+        //  {
+        //     contex.drawImage(overlay, 0, 0, 640, 480);
+        //  }
          context.drawImage(video, 0, 0, 640, 480);
-         const imgurl = canvas.toDataURL('image/png');
+         var imgurl = canvas.toDataURL('image/png');
          const image = document.createElement('img');
          image.setAttribute('src', imgurl);
          console.log(imgurl);
          photos.appendChild(image);
+         document.getElementById("hidden1").value = imgurl;
+         document.getElementById("hidden2").value = sticker;
     }
 }
 </script>
@@ -86,10 +93,13 @@ if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)
 <?php
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
+
 error_reporting(E_ALL);
 require_once("config/database.php");
 
-
-// $url = $_GET['url'];
-// echo $url;
+if (isset($_POST['hidden2']))
+{
+    echo "You submitted {$_POST['hidden2']}";
+    die;
+ }
 ?>

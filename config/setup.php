@@ -17,7 +17,16 @@ $db->query("USE ".$dbname);
 		verified int DEFAULT '0' NOT NULL)";
 	$table = $db->exec($statement);
 	$table = "photos";
-	$columns = "id int PRIMARY KEY AUTO_INCREMENT NOT NULL, picture varchar(255) NOT NULL";
+	$columns = "id int PRIMARY KEY AUTO_INCREMENT NOT NULL,
+		`file_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+		`uploaded_on` datetime NOT NULL,
+		`status` enum('1','0') COLLATE utf8_unicode_ci NOT NULL DEFAULT '1'";
+	$statement = "CREATE TABLE IF NOT EXISTS `$dbname`.`$table` ($columns)";
+	$table = $db->exec($statement);
+	$table = "photo_likes";
+	$columns = "id int PRIMARY KEY AUTO_INCREMENT NOT NULL,
+	`user` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+	`photo` enum('1','0') COLLATE utf8_unicode_ci NOT NULL DEFAULT '1'";
 	$statement = "CREATE TABLE IF NOT EXISTS `$dbname`.`$table` ($columns)";
 	$table = $db->exec($statement);
 ?>
