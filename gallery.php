@@ -1,3 +1,4 @@
+<link rel="stylesheet"  href="gallery.css">
 <?php
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -24,29 +25,41 @@ while ($row = $query->fetchobject())
     $row->liked_by = $row->liked_by ? explode('|', $row->liked_by) : [];
     $photos[] = $row;
 }
+echo '<pre>', print_r($photos, true), '</pre>';
 $query = $db->prepare("SELECT * FROM photos ORDER BY uploaded_on DESC");
 $query->execute();
 $num = $query->rowCount();
-foreach($photos as $art)
-{
-    if($num > 0){
-        while($row = $query->fetch(PDO::FETCH_ASSOC)){
-            $imageURL = 'uploads/'.$row["file_name"];
+$i = 0;
+    if($num > 0)
+    {
+        while($line = $query->fetch(PDO::FETCH_ASSOC))
+        {
+            $imageURL[] = 'uploads/'.$line["file_name"];
+        }
+        echo '<pre>', print_r($imageURL, true), '</pre>';
+    }
+    else
+    {
+        echo "No image(s) found...";
+    } 
+    foreach($photos as $art)
+ {
 ?>
 <div class="photos">
-    <img width="640px" height="480px" src="<?php echo $imageURL; ?>" alt="" />
-    <a href="like.php?type=photo&id=<?php echo $art->id ?>">Like</a>
+    <img width="440px" height="380px" src="<?php echo $imageURL[$i]; ?>" alt="" />
+  <a href="like.php?type=photo&id=<?php echo $art->id ?>"> <img src="like.png" id="like"></a></img>
     <p><?php echo $art->likes; ?> people like this</p>
 <?php if (!empty($art->liked_by)): ?>
 <ul>
-    <?php foreach ($art->liked_by as $user): ?>
-    <li> <?php echo $user; ?></li>
-<?php endforeach;?>
+    <?php  foreach ($art->liked_by as $user): ?>
+     <li>
+     <?php
+       echo $user; 
+      ?>
+      </li>
+<?php endforeach; ?>
 </ul>
 <?php endif; ?>
-
-</div>
-<?php }
-}else{ ?>
-    <p>No image(s) found...</p>
-<?php } }?>
+<?php $i++ ?>
+ <?php } ?>
+<div>

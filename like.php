@@ -30,5 +30,5 @@ if (isset($_GET['type']) && isset($_GET['id']))
             ");
     }  
 }
-header("Location:http://localhost:8080/camagru/gallery.php");
+ header("Location:http://localhost:8080/camagru/gallery.php");
 ?>
