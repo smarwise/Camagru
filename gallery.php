@@ -46,16 +46,19 @@ else
 } 
 foreach($photos as $art)
 {
-    echo 
-    $comments = $db->query("SELECT * FROM comments where photo_id = $art->id");
+    // $n = 0;
+    $comments = $db->prepare("SELECT * FROM comments where photo_id = $art->id");
+    $comments->execute();
     $rows = $comments->rowCount();
+    $coms = array();
     if ($rows > 0)
     {
         while($line = $comments->fetch(PDO::FETCH_ASSOC))
         {
+            // $line->comment =  $line->comment ? explode('|',  $line->comment) : [];
             $coms[] = $line;
         }
-        echo '<pre>', print_r($coms, true), '</pre>';
+        // echo '<pre>', print_r($coms, true), '</pre>';
     }
    
 ?>
@@ -77,11 +80,13 @@ foreach($photos as $art)
       </li>
 <?php endforeach; ?>
 </ul>
+<?php endif; ?>
+<?php if (!empty($coms[0]["comment"])): ?>
 <ul>
-<?php  foreach ($coms->comment as $com): ?>
+    <?php foreach ($coms as $com): ?>
      <li>
      <?php
-       echo $com; 
+       echo $com['comment']; 
       ?>
       </li>
 <?php endforeach; ?>
