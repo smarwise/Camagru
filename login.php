@@ -98,7 +98,11 @@ if (isset($user) && isset($pwd))
 	if (userexists($user, $pwd) == 1)
 	{
 		session_start();
-		$_SESSION["user_id"] = (int)1;
+		$query = "SELECT id FROM users where username = :user";
+    	$line = $db->prepare($query);
+		$line->bindParam(':user', $user);
+		$id = $line->execute();
+		$_SESSION["user_id"] = $id;
   		$_SESSION["username"] = $user;
 		$_SESSION["logged"] = true;
 		header("Location:http://localhost:8080/Camagru/homepage.php?user=".$user);
