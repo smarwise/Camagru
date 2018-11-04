@@ -15,6 +15,7 @@ require_once("config/setup.php");
 <body>
 	<div class="navbar">
 		<a href="http://localhost:8080/Camagru/index.php">Home</a>
+		<a href="http://localhost:8080/Camagru/gallery.php">Gallery</a>
 		<a href="http://localhost:8080/Camagru/login.php">Login</a>
 		<a href="http://localhost:8080/Camagru/signup.php">SignUp</a>
 		</div>

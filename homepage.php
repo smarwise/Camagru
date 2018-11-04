@@ -20,7 +20,7 @@ echo $user;
 		<a href="http://localhost:8080/Camagru/settings.php?user=?".$user>Settings</a>
 		<a href="http://localhost:8080/Camagru/editpage.php">Edit</a>
 		<a href="http://localhost:8080/Camagru/gallery.php">Gallery</a>
-		<a float="right" href="#">Sign Out</a>
+		<a href="http://localhost:8080/Camagru/signout.php">Sign Out</a>
 	  </div>
 	  <br />
 	</body>

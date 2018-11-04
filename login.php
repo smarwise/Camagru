@@ -48,9 +48,11 @@ function	userexists($user, $pwd)
 	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	$db->query("USE ".$dbname);
 	$pswd = hash('whirlpool', $pwd);
-	$query = $db->prepare("SELECT username,passwd  FROM users WHERE username = :name AND passwd = :passwd");
+	$one = "1";
+	$query = $db->prepare("SELECT username,passwd  FROM users WHERE username = :name AND passwd = :passwd AND verified = :one");
 	$query->bindParam(':name', $user);
 	$query->bindParam(':passwd', $pswd);
+	$query->bindParam(':one', $one);
 	$query->execute();
 	if ($query->rowcount() > 0)
 		return (1);
@@ -102,6 +104,6 @@ if (isset($user) && isset($pwd))
 		header("Location:http://localhost:8080/Camagru/homepage.php?user=".$user);
 	}
 	else
-		echo "Username and password do not match";
+		echo "Username and password do not match or Account is not yet verified";
 }
 ?>
