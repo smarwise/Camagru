@@ -37,7 +37,6 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 require_once("config/database.php");
-session_start();
 
 $db->query("USE ".$dbname);
 function	userexists($user, $pwd)
@@ -90,7 +89,6 @@ if (isset($_GET['code']))
 if (isset($_POST['user']) && isset($_POST['passwd']))
 {
 	$user = $_POST['user'];
-	// $_SESSION['user'] = $user;
 	$pwd = $_POST['passwd'];
 }
 if (isset($user) && isset($pwd))
@@ -103,8 +101,17 @@ if (isset($user) && isset($pwd))
 		$line->bindParam(':user', $user);
 		$id = $line->execute();
 		$_SESSION["user_id"] = $id;
+		$query = "SELECT * FROM users where username = :user";
+    	$line = $db->prepare($query);
+		$line->bindParam(':user', $user);
+		$email = $line->execute();
+		while ($row = $line->fetch(PDO::FETCH_ASSOC))
+        {
+            $email = $row;
+        }
+		$_SESSION['email'] = $email["email"];
   		$_SESSION["username"] = $user;
-		$_SESSION["logged"] = true;
+		$_SESSION["logged_in"] = true;
 		header("Location:http://localhost:8080/Camagru/homepage.php?user=".$user);
 	}
 	else

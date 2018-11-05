@@ -9,12 +9,14 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 require_once("config/database.php");
 require_once("config/setup.php");
+session_start();
+
 $statusMsg = '';
 $db->query("USE ".$dbname);
 $targetDir = "uploads/";
 $fileName = basename($_FILES["file"]["name"]);
 $targetFilePath = $targetDir . $fileName;
-$fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
+$fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
 if (isset($_POST["submit"]) && !empty($_FILES["file"]["name"]))
 {
     $allowTypes = array('jpg','png','jpeg','gif','pdf');
@@ -22,9 +24,11 @@ if (isset($_POST["submit"]) && !empty($_FILES["file"]["name"]))
     {
         if (move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath))
         {
-            $query = "INSERT into photos (file_name, uploaded_on) VALUES (:name, NOW())";
+            $email = $_SESSION['email'];
+            $query = "INSERT into photos (file_name, uploaded_on, owner_email) VALUES (:name, NOW(), :email)";
             $stmt = $db->prepare( $query );
             $stmt->bindParam(':name', $fileName);
+            $stmt->bindParam(':email', $email);
             $insert = $stmt->execute();
             if ($insert)
             {

@@ -3,6 +3,12 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 require_once("config/database.php");
+session_start();
+
+if (!isset($_SESSION["logged_in"]))
+{
+    header("Location:http://localhost:8080/Camagru/login.php");
+}
 ?>
 <html>
 <head>
@@ -11,6 +17,12 @@ require_once("config/database.php");
 </head>
 <div class="header">
    <h1> CAMAGRU </h1>
+</div>
+<div class="navbar">
+		<a href="http://localhost:8080/Camagru/index.php">Home</a>
+		<a href="http://localhost:8080/Camagru/gallery.php">Gallery</a>
+        <a href="http://localhost:8080/Camagru/upload.php">Upload</a>
+		<a href="http://localhost:8080/Camagru/signout.php">Sign Out</a
 </div>
 <div class="top" style="position:relative;">
 <video id="video" width="640" height="480" muted="muted" autoplay></video>

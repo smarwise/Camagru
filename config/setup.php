@@ -18,6 +18,7 @@ $db->query("USE ".$dbname);
 	$table = $db->exec($statement);
 	$table = "photos";
 	$columns = "id int PRIMARY KEY AUTO_INCREMENT NOT NULL,
+		`owner_email` varchar(255) NOT NULL,
 		`file_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
 		`uploaded_on` datetime NOT NULL";
 	$statement = "CREATE TABLE IF NOT EXISTS `$dbname`.`$table` ($columns)";
