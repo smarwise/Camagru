@@ -11,6 +11,10 @@ $name = $_GET['id'];
 $comment = $_POST['comment'];
 $email = $_SESSION['email'];
 
+if (!isset($_SESSION["logged_in"]))
+{
+    header("Location:http://localhost:8080/Camagru/login.php");
+}
 $comment_length = strlen($comment);
 if ($comment_length > 100)
 {
@@ -38,10 +42,18 @@ else
         $notification = $row;
 	}
 	$not =  $notification['notifications'];
+	$query = "INSERT INTO comments (name, comment, photo_id) VALUES ('$name', '$comment', '$name')";
+	$line = $db->prepare($query);
+	$line->bindParam(':name', $name);
+	$line->bindParam(':comment', $comment);
+	$line->bindParam(':photo_id', $name);
+	if (!$line->execute())
+	{
+		echo "please enter a valid comment";
+	}
 	if ($not == "on")
 	{
 		$htmlStr = "";
-		$db->query("INSERT INTO comments (name, comment, photo_id) VALUES ('$name', '$comment', '$name')");
 		$htmlStr .= "Hi " . $owner_email . ",<br /><br />";
 		$htmlStr .= $_SESSION['username']. " commented on your picture .<br /><br /><br />";
 		$htmlStr .= "Kind regards,<br />";
@@ -54,7 +66,7 @@ else
 		$headers .= "From: {$name} <{$email_sender}> \n";
 		$body = $htmlStr;
 		mail($recipient_email, $subject, $body, $headers);
-		// header("location: gallery.php");
 	}
+	header("location: gallery.php");
 }
 ?>

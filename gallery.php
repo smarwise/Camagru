@@ -46,7 +46,6 @@ else
 } 
 foreach($photos as $art)
 {
-    // $n = 0;
     $comments = $db->prepare("SELECT * FROM comments where photo_id = $art->id");
     $comments->execute();
     $rows = $comments->rowCount();
@@ -55,7 +54,6 @@ foreach($photos as $art)
     {
         while($line = $comments->fetch(PDO::FETCH_ASSOC))
         {
-            // $line->comment =  $line->comment ? explode('|',  $line->comment) : [];
             $coms[] = $line;
         }
         // echo '<pre>', print_r($coms, true), '</pre>';
@@ -68,6 +66,7 @@ foreach($photos as $art)
   <form action="comment.php?id=<?php echo $art->id ?>" method="post">
 <textarea name="comment" cols="50" rows="2" placeholder="Enter a comment"></textarea>
 <input type="submit" value="post">
+<a href="delete.php?type=photo&id=<?php echo $art->id ?>">delete</a>
 </form>
     <p><?php echo $art->likes; ?> people like this</p>
 <?php if (!empty($art->liked_by)): ?>
