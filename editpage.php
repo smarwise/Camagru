@@ -84,12 +84,12 @@ if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)
     });
      function takePicture()
      {
-        // var overlay = new Image();
-        //  overlay.src = sticker;
-        //  overlay.onload = function()
-        //  {
-        //     contex.drawImage(overlay, 0, 0, 640, 480);
-        //  }
+        var overlay = new Image();
+         overlay.src = sticker;
+         overlay.onload = function()
+         {
+            context.drawImage(overlay, 0, 0, 640, 480);
+         }
          context.drawImage(video, 0, 0, 640, 480);
          var imgurl = canvas.toDataURL('image/png');
          const image = document.createElement('img');

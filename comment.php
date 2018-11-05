@@ -29,20 +29,32 @@ else
         $photo_owner = $row;
 	}
 	$owner_email = $photo_owner["owner_email"];
-	$htmlStr = "";
-    $db->query("INSERT INTO comments (name, comment, photo_id) VALUES ('$name', '$comment', '$name')");
-    $htmlStr .= "Hi " . $owner_email . ",<br /><br />";
-	$htmlStr .= $_SESSION['username']. " commented on your picture .<br /><br /><br />";
-	$htmlStr .= "Kind regards,<br />";
-	$name = "Camagru";
-	$email_sender = "no-reply@camagru.com";
-	$subject = "New Comment| Camagru";
-	$recipient_email = $owner_email;
-	$headers  = "MIME-Version: 1.0\r\n";
-	$headers .= "Content-type: text/html; charset=iso-8859-1\r\n";
-	$headers .= "From: {$name} <{$email_sender}> \n";
-	$body = $htmlStr;
-	mail($recipient_email, $subject, $body, $headers);
-    header("location: gallery.php");
+	$query = "SELECT * FROM users where email = :email";
+    $line = $db->prepare($query);
+	$line->bindParam(':email', $owner_email);
+	$line->execute();
+	while ($row = $line->fetch(PDO::FETCH_ASSOC))
+    {
+        $notification = $row;
+	}
+	$not =  $notification['notifications'];
+	if ($not == "on")
+	{
+		$htmlStr = "";
+		$db->query("INSERT INTO comments (name, comment, photo_id) VALUES ('$name', '$comment', '$name')");
+		$htmlStr .= "Hi " . $owner_email . ",<br /><br />";
+		$htmlStr .= $_SESSION['username']. " commented on your picture .<br /><br /><br />";
+		$htmlStr .= "Kind regards,<br />";
+		$name = "Camagru";
+		$email_sender = "no-reply@camagru.com";
+		$subject = "New Comment| Camagru";
+		$recipient_email = $owner_email;
+		$headers  = "MIME-Version: 1.0\r\n";
+		$headers .= "Content-type: text/html; charset=iso-8859-1\r\n";
+		$headers .= "From: {$name} <{$email_sender}> \n";
+		$body = $htmlStr;
+		mail($recipient_email, $subject, $body, $headers);
+		// header("location: gallery.php");
+	}
 }
 ?>
