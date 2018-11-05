@@ -181,7 +181,7 @@ if (isset($_POST['on']))
 {
   if (isset($_POST['on']) && $_POST['on'] == 'On')
   {
-    $user = $_SESSION['user'];
+    $user = $_SESSION['username'];
     $query = "UPDATE users set notifications = :on where username = :user";
     $line = $db->prepare($query);
     $on = "on";

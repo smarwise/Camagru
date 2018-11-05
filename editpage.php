@@ -19,7 +19,7 @@ if (!isset($_SESSION["logged_in"]))
    <h1> CAMAGRU </h1>
 </div>
 <div class="navbar">
-		<a href="http://localhost:8080/Camagru/index.php">Home</a>
+		<a href="http://localhost:8080/Camagru/homepage.php">Home</a>
 		<a href="http://localhost:8080/Camagru/gallery.php">Gallery</a>
         <a href="http://localhost:8080/Camagru/upload.php">Upload</a>
 		<a href="http://localhost:8080/Camagru/signout.php">Sign Out</a
