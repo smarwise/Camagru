@@ -28,8 +28,17 @@ while ($row = $query->fetchobject())
     $row->liked_by = $row->liked_by ? explode('|', $row->liked_by) : [];
     $photos[] = $row;
 }
-// echo '<pre>', print_r($photos, true), '</pre>';
 $query = $db->prepare("SELECT * FROM photos ORDER BY uploaded_on DESC");
+$query->execute();
+$num = $query->rowCount();
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$perpage = 5;
+$start = ($page > 1) ? ($page * $perpage) - $perpage : 0;
+//pages
+$total = $num;
+$pages = $total % $perpage == 0 ? $total / $perpage : $total / $perpage + 1;
+$pages = (int)$pages;
+$query = $db->prepare("SELECT * FROM photos ORDER BY uploaded_on DESC limit {$start},{$perpage}");
 $query->execute();
 $num = $query->rowCount();
 $i = 0;
@@ -39,28 +48,35 @@ if ($num > 0)
     {
        $imageURL[] = 'uploads/'.$line["file_name"];
     }
-        // echo '<pre>', print_r($imageURL, true), '</pre>';
 }
 else
 {
     echo "No image(s) found...";
-} 
+}
+$n = 0;
 foreach($photos as $art)
 {
-    $comments = $db->prepare("SELECT * FROM comments where photo_id = $art->id");
-    $comments->execute();
-    $rows = $comments->rowCount();
-    $coms = array();
-    if ($rows > 0)
+    if ($n < 5)
     {
-        while($line = $comments->fetch(PDO::FETCH_ASSOC))
+        if (!isset($photos[($page * $perpage) + $n - 5]))
+            break;
+        $comments = NULL;
+        // echo "$art->id";
+        $comments = $db->prepare("SELECT * FROM comments where photo_id = $art->id");
+        $comments->execute();
+        $rows = $comments->rowCount();
+        $coms = array();
+        if ($rows > 0)
         {
-            $coms[] = $line;
+            while($line = $comments->fetch(PDO::FETCH_ASSOC))
+            {
+                $coms[] = $line;
+            }
         }
-        // echo '<pre>', print_r($coms, true), '</pre>';
-    }
+        // print_r($coms);
    
 ?>
+<section class="container some_about"><br>
 <div class="photos">
     <img width="440px" height="380px" src="<?php echo $imageURL[$i]; ?>" alt="" />
   <a href="like.php?type=photo&id=<?php echo $art->id ?>"> <img src="like.png" id="like"></a>
@@ -90,8 +106,18 @@ foreach($photos as $art)
       ?>
       </li>
 <?php endforeach; ?>
+
 </ul>
 <?php endif; ?>
 <?php $i++ ?>
+<?php $n++; } ?>
  <?php } ?>
+ <div class="">
+  <?php if ($page <= $pages): ?>
+    <a href="?page=<?php echo $page-1;?>">previous</a>
+    <a href="?page=<?php echo $page+1;?>">next</a>
+  <?php endif; ?>
+</div>
+<div class="space-30"></div>
+</section>
 <div>
