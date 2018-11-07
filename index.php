@@ -21,5 +21,6 @@ require_once("config/setup.php");
 		<a href="http://localhost:8080/Camagru/homepage.php">Home</a>
 		</div>
 	  <br />
+	  <div width="200px" height="200px"></div>
 	</body>
 </html>

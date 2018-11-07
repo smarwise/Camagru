@@ -10,6 +10,7 @@ $db->query("USE ".$dbname);
 $name = $_GET['id'];
 $comment = $_POST['comment'];
 $email = $_SESSION['email'];
+$page = $_GET['page'];
 
 if (!isset($_SESSION["logged_in"]))
 {
@@ -67,6 +68,6 @@ else
 		$body = $htmlStr;
 		mail($recipient_email, $subject, $body, $headers);
 	}
-	header("location: gallery.php");
+	header("location: gallery.php?page=$page");
 }
 ?>

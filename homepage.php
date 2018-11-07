@@ -4,6 +4,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 require_once("config/database.php");
 require_once("config/setup.php");
+require_once("navbar.php");
 session_start();
 
 $user = $_GET['user'];
@@ -15,13 +16,6 @@ echo $user;
 	<link rel="stylesheet"  href="landingpage.css">
 </head>
 <body>
-	<div class="navbar">
-		<a href="http://localhost:8080/Camagru/homepage.php">Home</a>
-		<a href="http://localhost:8080/Camagru/settings.php?user=?".$user>Settings</a>
-		<a href="http://localhost:8080/Camagru/editpage.php">Edit</a>
-		<a href="http://localhost:8080/Camagru/gallery.php">Gallery</a>
-		<a href="http://localhost:8080/Camagru/signout.php">Sign Out</a>
-	  </div>
 	  <br />
 	</body>
 </html>
