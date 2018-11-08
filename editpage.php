@@ -5,7 +5,6 @@ error_reporting(E_ALL);
 require_once("config/database.php");
 require_once("navbar.php");
 session_start();
-
 if (!isset($_SESSION["logged_in"]))
 {
     header("Location:http://localhost:8080/Camagru/login.php");
@@ -73,28 +72,19 @@ if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)
     });
     stickers.addEventListener('change', function(e)
     {
-        var sticker = e.target.value;
+        sticker = e.target.value;
         imgoverlay.src = sticker;
          e.preventDefault();
     });
      function takePicture()
      {
-        /*
-         *var overlay = new Image(vg);
-         *overlay.src = sticker;
-         *overlay.onload = function()
-         *{
-         *  context.drawImage(overlay, 0, 0, 640, 480);
-         *}
-         */
-
          context.drawImage(video, 0, 0, 640, 480);
          var imgurl = canvas.toDataURL('image/png');
          const image = document.createElement('img');
          image.setAttribute('src', imgurl);
-         console.log(imgurl);
+         console.log(sticker);
          photos.appendChild(image);
-         document.getElementById("hidden1").value = imgurl;
+         document.getElementById("hidden1").value = imgurl.split(',')[1];
          document.getElementById("hidden2").value = sticker;
     }
 }
@@ -103,13 +93,16 @@ if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)
 <?php
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
-
 error_reporting(E_ALL);
 require_once("config/database.php");
-
-if (isset($_POST['hidden2']))
+if (isset($_POST['hidden2']) && isset($_POST['hidden1']))
 {
-    echo "You submitted {$_POST['hidden2']}";
-    die;
+    file_put_contents('test.png', base64_decode($_POST['hidden1']));
+    $img1 = imagecreatefrompng("test.png");
+    $img2 = imagecreatefrompng($_POST['hidden2']);
+    imagecopy($img1, $img2, 0, 0, 0, 0, 640, 480);
+    // file_put_contents('test1.jpg', $img1);
+    header('Content-Type: image/gif');
+    imagegif($img1);
  }
 ?>
