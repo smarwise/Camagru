@@ -102,7 +102,8 @@ if (isset($_POST['hidden2']) && isset($_POST['hidden1']))
     $img2 = imagecreatefrompng($_POST['hidden2']);
     imagecopy($img1, $img2, 0, 0, 0, 0, 640, 480);
     // file_put_contents('test1.jpg', $img1);
-    header('Content-Type: image/gif');
-    imagegif($img1);
+    // header('Content-Type: image/jpeg');
+    // imagegif($img1);
+    imagejpeg($img1);
  }
 ?>
