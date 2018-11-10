@@ -32,15 +32,20 @@ if (!isset($_SESSION["logged_in"]))
 </select>
 <button id="snap">Snap Photo</button>
 <button id="clear">Clear</button>
-<form name="myform" action="editpage.php" method="post" id="myform">
+<!-- <form name="myform" action="editpage.php" method="post" id="myform">
       <input type="submit" name="submit" value="Test!" />
       <input type="hidden" name="hidden1" id="hidden1" />
       <input type="hidden" name="hidden2" id="hidden2" />
-   </form>
+   </form> -->
 <canvas id="canvas" width="640" height="480"></canvas>
 </div>
 <div class="bottom">
     <div id="photos" id="images"></div>
+<form method="post" action="editpage.php" id="myform">
+      <input type="hidden" name="hidden1" id="hidden1" />
+      <input type="hidden" name="hidden2" id="hidden2" />
+    <button id="save">Save</button>
+</form>
 <div>
 <script>
 var video = document.getElementById('video');
@@ -55,6 +60,7 @@ if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)
     var clear = document.getElementById('clear');
     var stickers = document.getElementById('stickers');
     var imgoverlay = document.getElementById('img-overlay');
+    var save = document.getElementById('save');
     navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) 
     {
         video.src = window.URL.createObjectURL(stream);
@@ -87,6 +93,10 @@ if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)
          document.getElementById("hidden1").value = imgurl.split(',')[1];
          document.getElementById("hidden2").value = sticker;
     }
+    save.addEventListener('click', function(e)
+    {
+        // echo "nothing to save";
+    });
 }
 </script>
 </html>
@@ -95,15 +105,32 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 require_once("config/database.php");
+require_once("config/setup.php");
+
+$db->query("USE ".$dbname);
 if (isset($_POST['hidden2']) && isset($_POST['hidden1']))
 {
-    file_put_contents('test.png', base64_decode($_POST['hidden1']));
-    $img1 = imagecreatefrompng("test.png");
-    $img2 = imagecreatefrompng($_POST['hidden2']);
-    imagecopy($img1, $img2, 0, 0, 0, 0, 640, 480);
+    $url = $_POST['hidden1'];
+    $path = 'uploads/';
+    $path .= $url;
+    $path .= '.png';
+    $filename = substr($url, 0, 10);
+    $filename .= '.png';
+    file_put_contents('uploads/'.$filename, base64_decode($_POST['hidden1']));
+    $email = $_SESSION['email'];
+    $query = "INSERT into photos (file_name, uploaded_on, owner_email) VALUES (:name, NOW(), :email)";
+    $stmt = $db->prepare( $query );
+    $stmt->bindParam(':name', $filename);
+    $stmt->bindParam(':email', $email);
+    $insert = $stmt->execute();
+ }
+?>
+<?php
+    // $img1 = imagecreatefrompng("test.png");
+    // $img2 = imagecreatefrompng($_POST['hidden2']);
+    // imagecopy($img1, $img2, 0, 0, 0, 0, 640, 480);
     // file_put_contents('test1.jpg', $img1);
     // header('Content-Type: image/jpeg');
     // imagegif($img1);
-    imagejpeg($img1);
- }
+    // imagejpeg($img1);
 ?>
