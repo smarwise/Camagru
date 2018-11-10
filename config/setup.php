@@ -36,4 +36,5 @@ $db->query("USE ".$dbname);
 		comment varchar(255) NOT NULL,
 		photo_id int NOT NULL)";
 	$table = $db->exec($statement);
+	$db->query('ALTER TABLE comments CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_bin');
 ?>

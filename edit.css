@@ -24,12 +24,14 @@ body
     text-align: center;
 }
 
-#images
+/* #images
 {
+    width: 500;
+    height: 350;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 10px;
-}
+} */
 
 #video
 {
@@ -40,23 +42,3 @@ body
 {
     max-width: 960px;
 }
-
-/* #overlay
-{
-    position:absolute;
-    width:160px;
-    min-height:40px;
-    background-color:#dadada;
-    z-index:300000;
-    bottom:10px;
-    left:10px;
-    text-align:center;
-} */
-
-/* #img-overlay
-{
-    position: absolute;
-    left: 0;
-    width: 640;
-    height: 480;
-} */

@@ -18,13 +18,12 @@ if (!isset($_SESSION["logged_in"]))
 <div class="header">
    <h1> CAMAGRU </h1>
 </div>
-<div class="top" style="position:relative;">
-<video id="video" width="640" height="480" muted="muted" autoplay></video>
-<img src="" alt="" id="img-overlay" style="position:absolute; left: 0;width: 640;height: 480;">
+<div style="position:relative;">
+<video id="video" width="500" height="350" muted="muted" autoplay></video>
+<img src="#" alt="" id="img-overlay" style="position:absolute; left: 0;width: 500;height: 350;">
 <select id="stickers">
 <option id="overlay" value="stickers/none.png">normal</option>
 <option id="overlay" value="stickers/cutecat.png">cutecat</option>
-<option id="overlay" value="stickers/bear.png">bear</option>
 <option id="overlay" value="stickers/dogears.png">dogears</option>
 <option id="overlay" value="stickers/hellokitty.png">hellokitty</option>
 <option id="overlay" value="stickers/lovehearts.png">lovehearts</option>
@@ -32,15 +31,10 @@ if (!isset($_SESSION["logged_in"]))
 </select>
 <button id="snap">Snap Photo</button>
 <button id="clear">Clear</button>
-<!-- <form name="myform" action="editpage.php" method="post" id="myform">
-      <input type="submit" name="submit" value="Test!" />
-      <input type="hidden" name="hidden1" id="hidden1" />
-      <input type="hidden" name="hidden2" id="hidden2" />
-   </form> -->
-<canvas id="canvas" width="640" height="480"></canvas>
+<canvas id="canvas" width="500" height="350"></canvas>
 </div>
 <div class="bottom">
-    <div id="photos" id="images"></div>
+    <div id="photos"></div>
 <form method="post" action="editpage.php" id="myform">
       <input type="hidden" name="hidden1" id="hidden1" />
       <input type="hidden" name="hidden2" id="hidden2" />
@@ -84,7 +78,7 @@ if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)
     });
      function takePicture()
      {
-         context.drawImage(video, 0, 0, 640, 480);
+         context.drawImage(video, 0, 0, 500, 350);
          var imgurl = canvas.toDataURL('image/png');
          const image = document.createElement('img');
          image.setAttribute('src', imgurl);
@@ -93,10 +87,6 @@ if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)
          document.getElementById("hidden1").value = imgurl.split(',')[1];
          document.getElementById("hidden2").value = sticker;
     }
-    save.addEventListener('click', function(e)
-    {
-        // echo "nothing to save";
-    });
 }
 </script>
 </html>
@@ -110,27 +100,38 @@ require_once("config/setup.php");
 $db->query("USE ".$dbname);
 if (isset($_POST['hidden2']) && isset($_POST['hidden1']))
 {
+    $sticker = $_POST['hidden2'];
     $url = $_POST['hidden1'];
     $path = 'uploads/';
     $path .= $url;
     $path .= '.png';
     $filename = substr($url, 0, 10);
     $filename .= '.png';
-    file_put_contents('uploads/'.$filename, base64_decode($_POST['hidden1']));
-    $email = $_SESSION['email'];
-    $query = "INSERT into photos (file_name, uploaded_on, owner_email) VALUES (:name, NOW(), :email)";
-    $stmt = $db->prepare( $query );
-    $stmt->bindParam(':name', $filename);
-    $stmt->bindParam(':email', $email);
-    $insert = $stmt->execute();
+    if ($sticker != 'none')
+    {
+        file_put_contents('uploads/'.$filename, base64_decode($_POST['hidden1']));
+        $baseimg = imagecreatefrompng('uploads/'.$filename);
+        // echo $sticker;
+        $stickeroverlay = imagecreatefrompng($sticker);
+        imagecopy($baseimg, $stickeroverlay, 0, 0, 0, 0, 500, 350);
+        imagepng($baseimg, 'uploads/'.$filename);
+        $email = $_SESSION['email'];
+        $query = "INSERT into photos (file_name, uploaded_on, owner_email) VALUES (:name, NOW(), :email)";
+        $stmt = $db->prepare( $query );
+        $stmt->bindParam(':name', $filename);
+        $stmt->bindParam(':email', $email);
+        $insert = $stmt->execute();
+    }
+    else
+    {
+        file_put_contents('uploads/'.$filename, base64_decode($_POST['hidden1']));
+        $email = $_SESSION['email'];
+        $query = "INSERT into photos (file_name, uploaded_on, owner_email) VALUES (:name, NOW(), :email)";
+        $stmt = $db->prepare( $query );
+        $stmt->bindParam(':name', $filename);
+        $stmt->bindParam(':email', $email);
+        $insert = $stmt->execute();
+    }
+    
  }
-?>
-<?php
-    // $img1 = imagecreatefrompng("test.png");
-    // $img2 = imagecreatefrompng($_POST['hidden2']);
-    // imagecopy($img1, $img2, 0, 0, 0, 0, 640, 480);
-    // file_put_contents('test1.jpg', $img1);
-    // header('Content-Type: image/jpeg');
-    // imagegif($img1);
-    // imagejpeg($img1);
 ?>
