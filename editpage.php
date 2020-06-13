@@ -28,7 +28,7 @@ if ($num > 0)
 <html>
 <head>
 	<title>Edit</title>
-	<link rel="stylesheet"  href="edit.css">
+	<link rel="stylesheet"  href="stylesheets/edit.css">
 </head>
 <div class="header">
    <h1> CAMAGRU </h1>

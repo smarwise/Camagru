@@ -1,5 +1,5 @@
 <head>
-	<link rel="stylesheet"  href="gallery.css">
+	<link rel="stylesheet"  href="stylesheets/gallery.css">
 </head>
 <?php
  require_once("navbar.php");

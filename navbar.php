@@ -1,5 +1,5 @@
 <head>
-	<link rel="stylesheet"  href="landingpage.css">
+	<link rel="stylesheet"  href="stylesheets/landingpage.css">
 </head>
 <div class="navbar">
 		<a href="http://localhost:81/Camagru/homepage.php">Home</a>

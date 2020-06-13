@@ -8,7 +8,7 @@ require_once("config/setup.php");
 <html>
 <head>
 	<title>Camagru</title>
-	<link rel="stylesheet"  href="index.css">
+	<link rel="stylesheet"  href="stylesheets/index.css">
 	<link href='https://fonts.googleapis.com/css?family=Charmonman' rel='stylesheet'>
 </head>
 <body>

@@ -1,7 +1,7 @@
 <html>
 <head>
 	<title>Camagru</title>
-	<link rel="stylesheet"  href="signup.css">
+	<link rel="stylesheet"  href="stylesheets/signup.css">
 	<link href='https://fonts.googleapis.com/css?family=Charmonman' rel='stylesheet'>
 </head>
 <body>

@@ -3,7 +3,7 @@
 <head>
 	<title>Sign Up</title>
 	<link href='https://fonts.googleapis.com/css?family=Charmonman' rel='stylesheet'>
-	<link rel="stylesheet"  href="login.css">
+	<link rel="stylesheet"  href="stylesheets/login.css">
 </head>
  <body>
 <div id="myspace">

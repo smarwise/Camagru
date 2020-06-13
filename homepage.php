@@ -13,7 +13,7 @@ echo $user;
 <!DOCTYPE html>
 <head>
 	<title>Camagru</title>
-	<link rel="stylesheet"  href="landingpage.css">
+	<link rel="stylesheet"  href="stylesheets/landingpage.css">
 </head>
 <body>
 	  <br />

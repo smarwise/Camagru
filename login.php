@@ -3,8 +3,8 @@
 <head>
 	<title>Login</title>
 	<link href='https://fonts.googleapis.com/css?family=Charmonman' rel='stylesheet'>
-	<link rel="stylesheet"  href="login.css">
-	<link rel="stylesheet" href="index.css">
+	<link rel="stylesheet"  href="stylesheets/login.css">
+	<link rel="stylesheet" href="stylesheets/index.css">
 </head>
  <body>
  <div class="navbar">

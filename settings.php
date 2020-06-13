@@ -1,6 +1,6 @@
 <head>
 	<title>Settings</title>
-	<link rel="stylesheet"  href="settings.css">
+	<link rel="stylesheet"  href="stylesheets/settings.css">
 </head>
 <form action="settings.php" method="post">
   <h1>Settings</h1>
