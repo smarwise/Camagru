@@ -4,15 +4,17 @@
 	<title>Login</title>
 	<link href='https://fonts.googleapis.com/css?family=Charmonman' rel='stylesheet'>
 	<link rel="stylesheet"  href="login.css">
+	<link rel="stylesheet" href="index.css">
 </head>
  <body>
  <div class="navbar">
-		<a href="http://localhost:8080/Camagru/index.php">Home</a>
-		<a href="http://localhost:8080/Camagru/login.php">Login</a>
+		<a href="http://localhost:81/Camagru/index.php">Home</a>
+		<a href="http://localhost:81/Camagru/galerry.php">Gallery</a>
+		<a href="http://localhost:81/Camagru/signup.php">SignUp</a>
 	</div>
-<div id="myspace">
+<div class="form_style">
 <form action="login.php" method="post">
-<div align="center">
+<div>
   <h1>Camagru</h1>
   <label for="email" class="minor"><b>Username</b></label>
   <input type="text" placeholder="Enter Username" name="user" required>
@@ -25,7 +27,7 @@
   <label>
         <input type="checkbox" checked="checked" name="remember"> Remember me
 	  </label><br /><br />
- <span class="psw"><a href="http://localhost:8080/Camagru/resetpwd.php">Forgot password?</a></span>
+ <span class="psw"><a href="http://localhost:81/Camagru/resetpwd.php">Forgot password?</a></span>
  </div>
 </form>
 </div>
@@ -43,7 +45,7 @@ function	userexists($user, $pwd)
 {
 	$host = "localhost";
 	$dbname = "db_smarwise";
-	$db = new PDO("mysql:host=$host", "root", "codecrazy");
+	$db = new PDO("mysql:host=$host", "root", "123456");
 	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	$db->query("USE ".$dbname);
 	$pswd = hash('whirlpool', $pwd);

@@ -15,7 +15,7 @@
 	<br /><br />
   <button type="submit">Reset Password</button>
   <button type="button">Cancel</button><br /><br />
- <span><a href="http://localhost:8080/Camagru/login.php">Login</a></span>
+ <span><a href="http://localhost:81/Camagru/login.php">Login</a></span>
  </div>
 </form>
 </div>
@@ -38,13 +38,13 @@ $query->execute();
 if ($query->rowcount() > 0)
 {
   $verificationCode = md5(uniqid("something", true));
-	$verificationLink = "http://localhost:8080/Camagru/reset.php?code=" . $verificationCode;
+	$verificationLink = "http://localhost:81/Camagru/reset.php?code=" . $verificationCode;
 	$htmlStr = "";
 	$htmlStr .= "Hi " . $email . ",<br /><br />";
 	$htmlStr .= "Please click the button below to reset your password and have access to the Camagru website.<br /><br /><br />";
 	$htmlStr .= "<a href='{$verificationLink}' target='_blank' style='padding:1em; font-weight:bold; background-color:blue; color:#fff;'>RESET PASSWORD</a><br /><br /><br />";
 	$htmlStr .= "Kind regards,<br />";
-	$htmlStr .= "<a href='http://localhost:8080/Camagru/' target='_blank'>Camagru</a><br />";
+	$htmlStr .= "<a href='http://localhost:81/Camagru/' target='_blank'>Camagru</a><br />";
 	$name = "Camagru";
 	$email_sender = "no-reply@camagru.com";
 	$subject = "Password Reset | Camagru";

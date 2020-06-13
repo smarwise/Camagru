@@ -2,7 +2,7 @@
 
 $host = "localhost";
 $username = "root";
-$password = "codecrazy";
+$password = "123456";
 $table = "users";
 $dbname = "db_smarwise";
 $db = null;

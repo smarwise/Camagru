@@ -2,7 +2,7 @@
 
 
 require_once("database.php");
-$db = new PDO("mysql:host=$host", 'root', 'codecrazy');
+$db = new PDO("mysql:host=$host", 'root', '123456');
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $db->query("USE ".$dbname);
 

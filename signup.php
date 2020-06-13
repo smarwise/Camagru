@@ -1,30 +1,30 @@
 <html>
 <head>
 	<title>Camagru</title>
-	<link rel="stylesheet"  href="landingpage.css">
-	<link rel="stylesheet"  href="login.css">
+	<link rel="stylesheet"  href="signup.css">
 	<link href='https://fonts.googleapis.com/css?family=Charmonman' rel='stylesheet'>
 </head>
 <body>
-		<div id="myspace">
+	<div class="navbar">
+		<a href="http://localhost:81/Camagru/index.php">Home</a>
+		<a href="http://localhost:81/Camagru/galerry.php">Gallery</a>
+		<a href="http://localhost:81/Camagru/login.php">Login</a>
+	</div>
+		<div class="form_style">
 		<form action="signup.php" method="post">
-		<div class="input-wrapper" align="center">
+		<div class="input-wrapper">
 			<h1>Camagru</h1>
 			<label for="email" class="minor"><b>Email</b></label>
 			<input type="text" placeholder="Enter Email" name="email" required>
-			<br /><br />
 			<label for="username" class="minor"><b>Username</b></label>
 			<input type="text" placeholder="Enter Username" name="user" required>
-			<br /><br />
 			<label for="psw" class="minor" ><b>Password</b></label>
 			<input type="password" placeholder="Enter Password" name="passwd" required>
-			<br /><br />
 			<label for="psw" class="minor" ><b>Repeat Password</b></label>
 			<input type="password" placeholder="Enter Password" name="passwd2" required>
-			<br /><br />
 			<button type="submit">Create Account</button>
-			<button type="button">Cancel</button><br /><br />
-		<span>Already a user?  <a href="http://localhost:8080/Camagru/login.php">Login</a></span>
+			<button type="button">Cancel</button>
+		<span>Already a user?  <a href="http://localhost:81/Camagru/login.php">Login</a></span>
 		</div>
         </form>
 </body>
@@ -86,13 +86,13 @@ if ($_POST['email'] && $_POST['user'] && $_POST['passwd'] && $_POST['passwd2'])
 		exit;
 	}     
 	$verificationCode = md5(uniqid("something", true));
-	$verificationLink = "http://localhost:8080/Camagru/login.php?code=" . $verificationCode;
+	$verificationLink = "http://localhost:81/Camagru/login.php?code=" . $verificationCode;
 	$htmlStr = "";
 	$htmlStr .= "Hi " . $email . ",<br /><br />";
 	$htmlStr .= "Please click the button below to verify your subscription and have access to the Camagru website.<br /><br /><br />";
 	$htmlStr .= "<a href='{$verificationLink}' target='_blank' style='padding:1em; font-weight:bold; background-color:blue; color:#fff;'>VERIFY EMAIL</a><br /><br /><br />";
 	$htmlStr .= "Kind regards,<br />";
-	$htmlStr .= "<a href='http://localhost:8080/Camagru/' target='_blank'>Camagru</a><br />";
+	$htmlStr .= "<a href='http://localhost:81/Camagru/' target='_blank'>Camagru</a><br />";
 	$name = "Camagru";
 	$email_sender = "no-reply@camagru.com";
 	$subject = "Verification Link | Camagru | Registration";

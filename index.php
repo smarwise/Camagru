@@ -8,18 +8,33 @@ require_once("config/setup.php");
 <html>
 <head>
 	<title>Camagru</title>
-	<link rel="stylesheet"  href="landingpage.css">
-	<link rel="stylesheet"  href="login.css">
+	<link rel="stylesheet"  href="index.css">
 	<link href='https://fonts.googleapis.com/css?family=Charmonman' rel='stylesheet'>
 </head>
 <body>
 	<div class="navbar">
-		<a href="http://localhost:8080/Camagru/index.php">Home</a>
-		<a href="http://localhost:8080/Camagru/galerry.php">Gallery</a>
-		<a href="http://localhost:8080/Camagru/login.php">Login</a>
-		<a href="http://localhost:8080/Camagru/signup.php">SignUp</a>
+		<a href="http://localhost:81/Camagru/index.php">Home</a>
+		<a href="http://localhost:81/Camagru/galerry.php">Gallery</a>
+		<a href="http://localhost:81/Camagru/login.php">Login</a>
 		</div>
 	  <br />
-	  <div width="200px" height="200px"></div>
+	  <div class="form_style">
+		<form action="signup.php" method="post">
+		<div class="input-wrapper">
+			<h1>Camagru</h1>
+			<label for="email"><b>Email</b></label>
+			<input type="text" placeholder="Enter Email" name="email" required>
+			<label for="username"><b>Username</b></label>
+			<input type="text" placeholder="Enter Username" name="user" required>
+			<label for="psw"><b>Password</b></label>
+			<input type="password" placeholder="Enter Password" name="passwd" required>
+			<label for="psw"><b>Repeat Password</b></label>
+			<input type="password" placeholder="Enter Password" name="passwd2" required>
+			<button type="submit">Create Account</button>
+			<button type="button">Cancel</button>
+		<span>Already a user?  <a href="http://localhost:81/Camagru/login.php">Login</a></span>
+		</div>
+        </form>
+	</div>
 	</body>
 </html>
