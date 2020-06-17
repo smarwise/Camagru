@@ -1,15 +1,9 @@
 <head>
-	<link rel="stylesheet"  href="stylesheets/landingpage.css">
+	<link rel="stylesheet"  href="stylesheets/index.css">
     <link rel="stylesheet"  href="stylesheets/gallery.css">
 </head>
-<div class="navbar">
-		<a href="http://localhost:81/Camagru/index.php">Home</a>
-		<a href="http://localhost:81/Camagru/galerry.php">Gallery</a>
-		<a href="http://localhost:81/Camagru/login.php">Login</a>
-		<a href="http://localhost:81/Camagru/signup.php">Register</a>
-</div>
-<div class="space-30"></div>
 <?php
+require_once("login_navbar.php");
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -91,7 +85,7 @@ foreach($photos as $art)
 <section class="container some_about"><br>
 <div class="photos">
     <img width="440px" height="380px" src="<?php echo $imageURL[$i]; ?>" alt="" />
-  <a href="like.php?type=photo&id=<?php echo $art->id ?>&page=<?php echo $page ?>"> <img src="like.png" id="like"></a>
+  <a href="like.php?type=photo&id=<?php echo $art->id ?>&page=<?php echo $page ?>"> <img src="images/like.png" id="like"></a>
     <p><?php echo $art->likes; ?> people like this</p>
 <?php if (!empty($coms[0]["comment"])): ?>
 <ul>

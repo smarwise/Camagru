@@ -81,3 +81,7 @@ button {
     cursor: pointer;
     width: 100%;
 }
+
+.space-30{
+    top: 90%;
+}

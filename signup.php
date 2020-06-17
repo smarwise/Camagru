@@ -1,3 +1,7 @@
+<?php
+require_once("login_navbar.php");
+?>
+
 <html>
 <head>
 	<title>Camagru</title>
@@ -5,11 +9,6 @@
 	<link href='https://fonts.googleapis.com/css?family=Charmonman' rel='stylesheet'>
 </head>
 <body>
-	<div class="navbar">
-		<a href="http://localhost:81/Camagru/index.php">Home</a>
-		<a href="http://localhost:81/Camagru/galerry.php">Gallery</a>
-		<a href="http://localhost:81/Camagru/login.php">Login</a>
-	</div>
 		<div class="form_style">
 		<form action="signup.php" method="post">
 		<div class="input-wrapper">
@@ -32,7 +31,6 @@
 
 
 <?php
-
 require_once("config/database.php");
 require_once("config/setup.php");
 
@@ -103,6 +101,8 @@ if ($_POST['email'] && $_POST['user'] && $_POST['passwd'] && $_POST['passwd2'])
 	$body = $htmlStr;
 	if (mail($recipient_email, $subject, $body, $headers) )
 		echo "<div id='successMessage'>A verification email was sent to <b>" . $email . "</b>, please open your email inbox and click the given link so you can login.</div>";
+	else
+		echo "<div id='successMessage'>Emailing failed.</div>";
 	$table = "users";
 	$sql = "INSERT INTO users (email, username, passwd, notifications, token) VALUES (:email, :username, :passwd, :noti, :token)";
 	$coolpwd = hash('whirlpool', $password);

@@ -90,7 +90,7 @@ if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)
     var save = document.getElementById('save');
     navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) 
     {
-        video.src = window.URL.createObjectURL(stream);
+        video.srcObject = stream;
         video.play();
     }); 
     photo.addEventListener("click", function(e) {

@@ -4,6 +4,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 require_once("config/database.php");
 require_once("config/setup.php");
+require_once("login_navbar.php");
 ?>
 <html>
 <head>
@@ -12,12 +13,6 @@ require_once("config/setup.php");
 	<link href='https://fonts.googleapis.com/css?family=Charmonman' rel='stylesheet'>
 </head>
 <body>
-	<div class="navbar">
-		<a href="http://localhost:81/Camagru/index.php">Home</a>
-		<a href="http://localhost:81/Camagru/galerry.php">Gallery</a>
-		<a href="http://localhost:81/Camagru/login.php">Login</a>
-		</div>
-	  <br />
 	  <div class="form_style">
 		<form action="signup.php" method="post">
 		<div class="input-wrapper">

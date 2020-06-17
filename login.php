@@ -7,11 +7,6 @@
 	<link rel="stylesheet" href="stylesheets/index.css">
 </head>
  <body>
- <div class="navbar">
-		<a href="http://localhost:81/Camagru/index.php">Home</a>
-		<a href="http://localhost:81/Camagru/galerry.php">Gallery</a>
-		<a href="http://localhost:81/Camagru/signup.php">SignUp</a>
-	</div>
 <div class="form_style">
 <form action="login.php" method="post">
 <div>
@@ -35,6 +30,7 @@
 </html>
 
 <?PHP
+require_once("login_navbar.php");
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
