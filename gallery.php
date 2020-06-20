@@ -83,15 +83,16 @@ foreach($photos as $art)
         }
    
 ?>
-<br/>
+<br> <br>
 <section class="container some_about"><br>
 <div class="photos">
     <img width="440px" height="380px" src="<?php echo $imageURL[$i]; ?>" alt="" />
   <a href="like.php?type=photo&id=<?php echo $art->id ?>&page=<?php echo $page ?>"> <img src="images/like.png" id="like"></a>
   <form action="comment.php?id=<?php echo $art->id ?>&page=<?php echo $page ?>" method="post">
-<textarea name="comment" cols="50" rows="2" placeholder="Enter a comment"></textarea>
-<input type="submit" value="post">
-<a href="delete.php?type=photo&id=<?php echo $art->id ?>">delete</a>
+<textarea name="comment" cols="50" rows="4" placeholder="Enter a comment"></textarea>
+<br/>
+<input type="submit" value="Post Comment" class="post">
+<a class="delete" href="delete.php?type=photo&id=<?php echo $art->id ?>">Delete Picture</a>
 </form>
     <p><?php echo $art->likes; ?> people like this</p>
 <?php if (!empty($coms[0]["comment"])): ?>

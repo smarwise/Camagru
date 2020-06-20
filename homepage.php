@@ -7,8 +7,8 @@ require_once("config/setup.php");
 require_once("navbar.php");
 session_start();
 
-$user = $_GET['user'];
-echo $user;
+if (!empty($_GET['user']))
+	$user = $_GET['user'];
 ?>
 <!DOCTYPE html>
 <head>

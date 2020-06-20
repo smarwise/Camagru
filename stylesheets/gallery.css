@@ -29,3 +29,24 @@ body
     padding: 14px 16px;
     text-decoration: none;
 }
+
+.post {
+    width: 160px !important;
+    padding: 12px 20px !important;
+    margin: 8px 0 !important;
+    box-sizing: border-box !important;
+    cursor: pointer;
+  }
+  
+.delete {
+  background-color: #5287c4 !important;
+  color: rgb(5, 5, 5) !important;
+  padding: 12px 20px !important;
+  text-align: center !important;
+  text-decoration: none !important;
+  display: inline-block !important;
+}
+
+textarea{
+  resize: none;
+}

@@ -82,6 +82,7 @@ foreach($photos as $art)
         }
    
 ?>
+<br> <br>
 <section class="container some_about"><br>
 <div class="photos">
     <img width="440px" height="380px" src="<?php echo $imageURL[$i]; ?>" alt="" />
