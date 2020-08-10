@@ -22,7 +22,7 @@
   <label>
         <input type="checkbox" checked="checked" name="remember"> Remember me
 	  </label><br /><br />
- <span class="psw"><a href="http://localhost:81/Camagru/resetpwd.php">Forgot password?</a></span>
+ <span class="psw"><a href="http://localhost:82/Camagru/resetpwd.php">Forgot password?</a></span>
  </div>
 </form>
 </div>

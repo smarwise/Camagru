@@ -23,7 +23,7 @@ require_once("login_navbar.php");
 			<input type="password" placeholder="Enter Password" name="passwd2" required>
 			<button type="submit">Create Account</button>
 			<button type="button">Cancel</button>
-		<span>Already a user?  <a href="http://localhost:81/Camagru/login.php">Login</a></span>
+		<span>Already a user?  <a href="http://localhost:82/Camagru/login.php">Login</a></span>
 		</div>
         </form>
 </body>
@@ -84,13 +84,13 @@ if ($_POST['email'] && $_POST['user'] && $_POST['passwd'] && $_POST['passwd2'])
 		exit;
 	}     
 	$verificationCode = md5(uniqid("something", true));
-	$verificationLink = "http://localhost:81/Camagru/login.php?code=" . $verificationCode;
+	$verificationLink = "http://localhost:82/Camagru/login.php?code=" . $verificationCode;
 	$htmlStr = "";
 	$htmlStr .= "Hi " . $email . ",<br /><br />";
 	$htmlStr .= "Please click the button below to verify your subscription and have access to the Camagru website.<br /><br /><br />";
 	$htmlStr .= "<a href='{$verificationLink}' target='_blank' style='padding:1em; font-weight:bold; background-color:blue; color:#fff;'>VERIFY EMAIL</a><br /><br /><br />";
 	$htmlStr .= "Kind regards,<br />";
-	$htmlStr .= "<a href='http://localhost:81/Camagru/' target='_blank'>Camagru</a><br />";
+	$htmlStr .= "<a href='http://localhost:82/Camagru/' target='_blank'>Camagru</a><br />";
 	$name = "Camagru";
 	$email_sender = "no-reply@camagru.com";
 	$subject = "Verification Link | Camagru | Registration";

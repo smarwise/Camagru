@@ -27,7 +27,7 @@ require_once("login_navbar.php");
 			<input type="password" placeholder="Enter Password" name="passwd2" required>
 			<button type="submit">Create Account</button>
 			<button type="button">Cancel</button>
-		<span>Already a user?  <a href="http://localhost:81/Camagru/login.php">Login</a></span>
+		<span>Already a user?  <a href="http://localhost:82/Camagru/login.php">Login</a></span>
 		</div>
         </form>
 	</div>

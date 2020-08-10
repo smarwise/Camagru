@@ -46,6 +46,7 @@ if ($num > 0)
 <video id="video" width="500" height="350" muted="muted" autoplay></video>
 <img src="#" alt="" id="img-overlay" style="position:absolute; left: 0;width: 500;height: 350;">
 <img src="#" alt="" id="img-overlay2" style="position:absolute; left: 0;width: 500;height: 350;">
+<br/>
 <button id="snap">Snap Photo</button>
 <div id="old-photos">
 <?php if (!empty($oldimages)):?>

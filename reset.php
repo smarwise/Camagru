@@ -18,7 +18,7 @@
 	<br /><br />
   <button type="submit">Reset Password</button>
   <button type="button">Cancel</button><br /><br />
- <span><a href="http://localhost:81/Camagru/login.php">Login</a></span>
+ <span><a href="http://localhost:82/Camagru/login.php">Login</a></span>
  </div>
 </form>
 </div>
