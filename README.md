@@ -33,7 +33,7 @@ Clone this repo to your local machine using:
 
 ```
 cd [Insert path to your MAMP/ WAMP / LAMP Directory ]/apache2/htdocs
-git clone https://github.com/CLetinic/Camagru.git
+git clone https://github.com/smarwise/Camagru.git
 ```
 
 # Setup
@@ -72,13 +72,13 @@ http://localhost/Camagru/config/setup.php
 
 # Samples | Screenshots
 ## Landing | Home page  
-![Screenshot_Landingpage](./misc/images/landing.png)
+![Screenshot_Landingpage](./misc/images/landing.PNG)
 
 ## Gallery
 ![Screenshot_Photobooth](https://res.cloudinary.com/smarwise/image/upload/v1579339283/samples/camagru.png)
 
 ### Taking A Photo With The Webcam
-![Screenshot_Webcam](./misc/images/edit.png)
+![Screenshot_Webcam](./misc/images/edit.PNG)
 
 # Project Insight
 ## Project Brief
@@ -92,4 +92,3 @@ http://localhost/Camagru/config/setup.php
 This web project challenges you to create a small web application allowing you to
 make basic photo and video editing using your webcam and some predefined images.
 
-![project pic](https://res.cloudinary.com/smarwise/image/upload/v1579339283/samples/camagru.png)
